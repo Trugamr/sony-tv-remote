@@ -1,0 +1,13 @@
+{
+  "name": "configs",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "type": "commonjs",
+  "files": [
+    "prettier.config.js"
+  ],
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
