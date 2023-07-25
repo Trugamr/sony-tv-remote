@@ -19,6 +19,6 @@
   "devDependencies": {
     "configs": "*",
     "prettier": "^2.8.8",
-    "turbo": "^1.10.9"
+    "turbo": "^1.10.11"
   }
 }

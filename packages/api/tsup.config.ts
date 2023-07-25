@@ -6,4 +6,5 @@ export default defineConfig({
   dts: true,
   entry: ['src/**/*.ts'],
   sourcemap: true,
+  clean: true,
 })

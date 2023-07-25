@@ -7,6 +7,7 @@ const config = {
   arrowParens: 'avoid',
   bracketSpacing: true,
   endOfLine: 'auto',
+  printWidth: 96,
 }
 
 module.exports = config
