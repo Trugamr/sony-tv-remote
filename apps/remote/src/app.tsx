@@ -1,8 +1,14 @@
-import { FormEvent, useState } from 'react'
+import { FormEvent, useMemo, useState } from 'react'
 import { Api } from 'api'
 
 export function App() {
   const [error, setError] = useState<Error | null>(null)
+  const initialValues = useMemo(() => {
+    return {
+      host: localStorage.getItem('host') ?? '',
+      psk: localStorage.getItem('psk') ?? '',
+    }
+  }, [])
 
   function handleOnSubmit(event: FormEvent<HTMLFormElement>) {
     // Prevent default form submission
@@ -25,7 +31,9 @@ export function App() {
         params: [{ status: true }],
       })
       .then(() => {
-        console.log('success')
+        console.log('success', 'persisting host and psk')
+        localStorage.setItem('host', host)
+        localStorage.setItem('psk', psk)
       })
       .catch(error => {
         if (error instanceof Error) {
@@ -39,12 +47,20 @@ export function App() {
     <main className="gap flex h-full w-full flex-col items-center justify-center bg-black p-6 text-white">
       <form onSubmit={handleOnSubmit} className="flex flex-col items-end gap-2.5 text-sm">
         <div className="flex gap-2 text-black">
-          <input className="px-2 py-1" name="host" placeholder="host" type="text" required />
+          <input
+            className="px-2 py-1"
+            name="host"
+            placeholder="host"
+            type="text"
+            defaultValue={initialValues.host}
+            required
+          />
           <input
             className="px-2 py-1"
             name="psk"
             placeholder="pre shared key"
             type="password"
+            defaultValue={initialValues.psk}
             required
           />
         </div>
