@@ -1,6 +1,6 @@
 import type { $Fetch } from 'ofetch'
 import { ofetch } from 'ofetch'
-import type { ApiOptions, InvokeOptions, InvokeResult } from './types.js'
+import type { Endpoint, Method, ApiOptions, InvokeOptions, InvokeResult } from './types.js'
 
 export class Api {
   #client: $Fetch
@@ -14,8 +14,14 @@ export class Api {
     this.#client = ofetch.create({ baseURL: host, headers })
   }
 
-  invoke({ id = 1, endpoint, method, version = '1.0', params = [''] }: InvokeOptions) {
-    return this.#client<InvokeResult>(endpoint, {
+  invoke<T extends Endpoint, U extends Method>({
+    id = 1,
+    endpoint,
+    method,
+    version = '1.0',
+    params = [''],
+  }: InvokeOptions<T, U>) {
+    return this.#client<InvokeResult<T, U>>(endpoint, {
       method: 'POST',
       body: { id, method, version, params },
     })
